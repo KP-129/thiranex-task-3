@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f8f6">
+  <meta name="description" content="A calm, focused workspace for your everyday tasks.">
+  <title>Taskflow — Find your focus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('taskflow-theme')||'light'}catch{document.documentElement.dataset.theme='light'}</script>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="auth-view" class="auth-view">
+    <section class="auth-art">
+      <div class="art-brand"><span class="brand-mark">✳</span> taskflow</div>
+      <div class="art-copy"><p class="eyebrow light">A little more intention</p><h1>Make room<br>for <em>what matters.</em></h1><p>Bring your tasks into focus and make progress, one small step at a time.</p></div>
+      <div class="art-note"><span class="note-dot"></span><div><strong>Your day, thoughtfully planned</strong><span>Less noise. More momentum.</span></div><span class="note-spark">✦</span></div>
+      <div class="art-shape shape-one"></div><div class="art-shape shape-two"></div>
+    </section>
+    <section class="auth-panel">
+      <div class="auth-mobile-brand"><span class="brand-mark">✳</span> taskflow</div>
+      <div class="auth-card">
+        <p class="eyebrow">WELCOME TO TASKFLOW</p><h2 id="auth-title">Good to have you back.</h2><p class="auth-subtitle" id="auth-subtitle">Sign in to pick up where you left off.</p>
+        <div class="auth-tabs"><button class="auth-tab active" data-mode="login">Sign in</button><button class="auth-tab" data-mode="register">Create account</button></div>
+        <form id="auth-form">
+          <label class="field" id="name-field" hidden><span>Your name</span><input name="name" autocomplete="name" placeholder="Alex Morgan" minlength="2"></label>
+          <label class="field"><span>Email address</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+          <label class="field"><span>Password</span><input name="password" type="password" autocomplete="current-password" placeholder="At least 8 characters" minlength="8" required></label>
+          <div id="auth-error" class="form-error" role="alert"></div>
+          <button class="button button-primary button-wide" type="submit"><span id="auth-submit">Sign in</span><span>→</span></button>
+        </form>
+        <p class="auth-footnote">Your work is personal. Your tasks stay yours.</p>
+      </div>
+      <p class="auth-copyright">© 2026 Taskflow · A calmer way to get things done</p>
+    </section>
+  </div>
+
+  <div id="app-view" class="app-view" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✳</span> taskflow</a>
+      <div class="workspace-label">WORKSPACE <span class="workspace-dot"></span></div>
+      <nav class="side-nav" aria-label="Task views">
+        <button class="nav-item active" data-filter="all"><span class="nav-icon">▦</span> All tasks <span class="nav-count" id="count-all">0</span></button>
+        <button class="nav-item" data-filter="today"><span class="nav-icon">◷</span> Today <span class="nav-count" id="count-today">0</span></button>
+        <button class="nav-item" data-filter="upcoming"><span class="nav-icon">▤</span> Upcoming</button>
+        <button class="nav-item" data-filter="completed"><span class="nav-icon">✓</span> Completed</button>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section-title">YOUR PROGRESS</div>
+      <div class="progress-card"><div class="progress-top"><span>Weekly progress</span><span id="progress-percent">0%</span></div><div class="progress-track"><span id="progress-bar"></span></div><p id="progress-caption">A fresh week is full of possibility.</p></div>
+      <div class="sidebar-bottom"><div class="tip-card"><span class="tip-icon">✦</span><p><strong>A gentle reminder</strong><br>Progress is progress, no matter how small.</p></div><button class="profile-button" id="profile-button"><span class="avatar" id="user-avatar">A</span><span class="profile-copy"><strong id="profile-name">Account</strong><small id="profile-email">Signed in</small></span><span class="profile-menu">···</span></button><div class="profile-popover" id="profile-menu" hidden><button id="logout-button">↗ &nbsp; Sign out</button></div></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><button class="mobile-menu" id="mobile-menu" aria-label="Open navigation">☰</button><div class="breadcrumb">Workspace <span>/</span> <strong id="page-label">All tasks</strong></div><div class="topbar-right"><span class="today-label" id="today-label"></span><div class="appearance-wrap"><button class="appearance-button" id="appearance-button" aria-label="Change appearance" aria-expanded="false" title="Appearance"><svg id="appearance-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button><section class="appearance-panel" id="appearance-panel" hidden aria-label="Appearance settings"><p class="eyebrow">APPEARANCE</p><div class="theme-options"><button type="button" data-theme-choice="light"><span>☼</span> Light</button><button type="button" data-theme-choice="dark"><span>☾</span> Dark</button></div><p class="appearance-hint">Choose the look for your workspace.</p></section></div><div class="notification-wrap"><button class="notification-button" id="notification-button" aria-label="Open reminders" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span class="notification-badge" id="notification-badge" hidden>0</span></button><section class="notification-panel" id="notification-panel" hidden aria-label="Task reminders"><div class="notification-panel-head"><div><p class="eyebrow">STAY ON TRACK</p><h2>Reminders <span id="notification-count">0</span></h2></div><span class="notification-flower">✳</span></div><p class="notification-hint" id="notification-hint"></p><button class="enable-notifications" id="enable-notifications">Turn on browser reminders <span>→</span></button><div class="notification-list" id="notification-list"></div></section></div><span class="top-avatar" id="top-avatar">A</span></div></header>
+      <section class="page-content">
+        <div class="welcome-row"><div><p class="eyebrow" id="welcome-eyebrow">YOUR PERSONAL WORKSPACE</p><h1 id="greeting">Good morning.</h1><p class="welcome-sub" id="welcome-sub">Let’s make today count, one task at a time.</p></div><button class="button button-primary add-task-button" id="add-task"><span>＋</span> New task</button></div>
+        <section class="focus-card"><div class="focus-copy"><span class="focus-kicker"><span class="focus-sun">☼</span> A MOMENT TO FOCUS</span><h2 id="focus-title">A clear mind starts with one small step.</h2><p id="focus-text">Choose a task, give it your attention, and let the rest wait.</p></div><div class="focus-illustration" aria-hidden="true"><div class="sun-orb"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="focus-flower">✳</div></div><button class="focus-action" id="focus-action" title="Show next task" aria-label="Show next task">↗</button></section>
+        <div class="stats-grid"><article class="stat-card"><div class="stat-label"><span class="stat-icon icon-lilac">▦</span> Total tasks</div><div class="stat-bottom"><strong id="stat-total">0</strong><span class="stat-note">in your workspace</span></div></article><article class="stat-card"><div class="stat-label"><span class="stat-icon icon-peach">◷</span> In progress</div><div class="stat-bottom"><strong id="stat-progress">0</strong><span class="stat-note">keep the momentum</span></div></article><article class="stat-card"><div class="stat-label"><span class="stat-icon icon-mint">✓</span> Completed</div><div class="stat-bottom"><strong id="stat-done">0</strong><span class="stat-note" id="stat-done-note">you’re making progress</span></div></article></div>
+        <section class="tasks-section"><div class="tasks-heading"><div><p class="eyebrow">YOUR TO-DO LIST</p><h2 id="list-heading">All tasks <span id="list-count">0</span></h2></div><div class="task-tools"><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Find a task..." aria-label="Search tasks"><kbd>⌘ K</kbd></label><select id="sort-select" class="sort-select" aria-label="Sort tasks"><option value="due">Due date</option><option value="created">Recently added</option><option value="priority">Priority</option></select></div></div><div class="filter-row"><button class="chip active" data-status="all">All <span id="chip-all">0</span></button><button class="chip" data-status="todo">To do <span id="chip-todo">0</span></button><button class="chip" data-status="in-progress">In progress <span id="chip-progress">0</span></button><button class="chip" data-status="done">Done <span id="chip-done">0</span></button></div><div id="task-list" class="task-list"></div><div id="empty-state" class="empty-state" hidden><div class="empty-illustration">✳</div><h3 id="empty-title">A little breathing room.</h3><p id="empty-copy">Nothing on your list just yet. Add a task when you’re ready.</p><button class="button button-soft" id="empty-add">＋ Create your first task</button></div></section>
+        <footer class="page-footer"><span>Made for thoughtful work <span class="footer-heart">✳</span></span><span id="footer-summary">You’ve got this.</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="task-modal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-heading"><div><p class="eyebrow">A TASK FOR YOUR DAY</p><h2 id="modal-title">Make a little progress.</h2></div><button class="icon-button" id="close-modal" aria-label="Close">×</button></div><form id="task-form"><label class="field"><span>Task title</span><input name="title" maxlength="160" placeholder="What would you like to get done?" required autofocus></label><label class="field"><span>A few details <small>· optional</small></span><textarea name="description" rows="3" maxlength="2000" placeholder="Add a note to help you get started..."></textarea></label><div class="form-row"><label class="field"><span>Due date</span><input name="dueDate" type="date"></label><label class="field"><span>Priority</span><select name="priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></label></div><label class="field"><span>Status</span><select name="status"><option value="todo">To do</option><option value="in-progress">In progress</option><option value="done">Done</option></select></label><div id="task-error" class="form-error" role="alert"></div><div class="modal-actions"><button class="button button-quiet" type="button" id="cancel-modal">Cancel</button><button class="button button-primary" type="submit" id="save-task">Save task <span>→</span></button></div></form></section></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js" defer></script>
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/realtime.js" defer></script>
+  <script src="/appearance.js" defer></script>
+  <script src="/notifications.js" defer></script>
+</body>
+</html>

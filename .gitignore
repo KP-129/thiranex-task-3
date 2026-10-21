@@ -1,0 +1,8 @@
+node_modules/
+data.json
+.env
+
+data/
+taskflow.sqlite
+taskflow.sqlite-shm
+taskflow.sqlite-wal
